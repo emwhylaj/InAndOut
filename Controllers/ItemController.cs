@@ -19,8 +19,24 @@ namespace InAndOut.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Item> itemList = _dbContext.Items.ToList();
-            return Ok(itemList);
+            IEnumerable<Item> itemList = _dbContext.Items;
+            return View(itemList);
+        }
+
+        //GET Create
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        //POST Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Item obj)
+        {
+            _dbContext.Items.Add(obj);
+            _dbContext.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

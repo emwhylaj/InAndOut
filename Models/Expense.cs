@@ -7,15 +7,17 @@ using System.Threading.Tasks;
 
 namespace InAndOut.Models
 {
-    public class Item
+    public class Expense
     {
         [Key]
         public int Id { get; set; }
 
-        public string Borrower { get; set; }
-        public string Lender { get; set; }
+        [Required]
+        [DisplayName("Expense")]
+        public string ExpenseName { get; set; }
 
-        [DisplayName("Item name")]
-        public string ItemName { get; set; }
+        [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Amount must be greater than 0!")]
+        public int Amount { get; set; }
     }
 }
