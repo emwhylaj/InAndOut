@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using InAndOut.Data;
 using InAndOut.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace InAndOut.Controllers
 {
@@ -26,6 +27,13 @@ namespace InAndOut.Controllers
         //GET Create
         public IActionResult Create()
         {
+            IEnumerable<SelectListItem> TypeDropDown = _dbContext.ExpenseTypes.Select(i => new SelectListItem
+            {
+                Text = i.Name,
+                Value = i.Id.ToString()
+            });
+
+            ViewBag.TypeDropDown = TypeDropDown;
             return View();
         }
 
